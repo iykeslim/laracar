@@ -53,6 +53,7 @@ class User extends Authenticatable
     {
         // delete all related photos
         $this->client()->delete();
+        $this->systemuser()->delete();
         // as suggested by Dirk in comment,
         // it's an uglier alternative, but faster
         // Photo::where("user_id", $this->id)->delete()

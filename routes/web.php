@@ -65,3 +65,11 @@ Route::post('/lavado','TipoLavadoController@store');
 Route::get('/lavado/{lavado}/edit','TipoLavadoController@edit');
 Route::patch('/lavado/{lavado}','TipoLavadoController@update');
 Route::delete('/lavado/{lavado}','TipoLavadoController@delete');
+
+Route::get('/usuario','UsuariosController@index');
+Route::get('/usuario/create','UsuariosController@create');
+Route::post('/usuario','UsuariosController@store');
+Route::get('/usuario/{user}/edit','UsuariosController@edit');
+Route::patch('/usuario/{user}','UsuariosController@update');
+Route::delete('/usuario/{user}','UsuariosController@delete');
+Route::get('/usuario/{user}','UsuariosController@show');

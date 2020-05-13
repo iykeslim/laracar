@@ -14,6 +14,7 @@ class MarcaController extends Controller
 
     public function index()
     {
+        // $this->authorize('create');
         $marcas = Marca::all();
         return view('marcas.index', compact('marcas'));
     }

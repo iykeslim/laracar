@@ -112,15 +112,19 @@ class ClientController extends Controller
 
     public function delete(User $user)
     {
-
+        if (is_null(auth()->user()->systemuser)) {
+            return redirect('/home');
+        }
         $user->delete();
         return redirect('/cliente');
     }
 
     public function index()
     {
+        if (is_null(auth()->user()->systemuser)) {
+            return redirect('/home');
+        }
 
-        // $this->authorize('viewAny');
         $clientes = Client::all();
         return view('clientes.index', compact('clientes'));
     }
