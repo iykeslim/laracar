@@ -53,6 +53,7 @@
                         <th>Fecha</th>
                         <th>Hora</th>
                         <th>Lavado</th>
+                        <th>Precio</th>
                         <th>Editar</th>
                         <th>Cancelar</th>
                     </tr>
@@ -69,6 +70,7 @@
                         <td>{{$turno->fecha}}</td>
                         <td>{{$turno->hora}}</td>
                         <td>{{$turno->lavado}}</td>
+                        <td>{{$turno->precio}}</td>
                         <td><a href="/turno/{{$turno->id}}/edit"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Editar</a></td>

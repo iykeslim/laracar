@@ -16,7 +16,8 @@
             <table class="table table-bordered table-striped">
                 <thead class="">
                     <tr>
-                        <th>lavado</th>
+                        <th>Lavado</th>
+                        <th>Precio</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -25,6 +26,7 @@
                     @foreach ($lavados as $lavado)
                     <tr>
                         <td>{{$lavado->tipo_lavado}}</td>
+                        <td>{{$lavado->precio}}</td>
                         <td><a href="/lavado/{{$lavado->id}}/edit"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Editar</a></td>

@@ -145,7 +145,7 @@
                     <div class="col-md-6">
                         <select name="lavado" id="lavado" class="form-control @error('lavado') is-invalid @enderror">
                             @foreach ($tipo_lavados as $tipo_lavado)
-                            <option value="{{$tipo_lavado->tipo_lavado}}">{{$tipo_lavado->tipo_lavado}}</option>
+                            <option value="{{$tipo_lavado->tipo_lavado}}">{{$tipo_lavado->tipo_lavado}}: ${{$tipo_lavado->precio}}</option>
                             @endforeach
                         </select>
                         {{-- <input id="lavado" type="text" class="form-control @error('lavado') is-invalid @enderror"

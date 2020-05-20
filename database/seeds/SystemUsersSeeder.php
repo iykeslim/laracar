@@ -27,6 +27,6 @@ class SystemUsersSeeder extends Seeder
             'user_id'=> $user->id,
             'role'=>'administrador',
             ]);
-        $user->push();
+        // $user->push();
     }
 }

@@ -15,7 +15,8 @@ class CreateWashTypesTable extends Migration
     {
         Schema::create('wash_types', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo_lavado');
+            $table->string('tipo_lavado')->unique();
+            $table->string('precio');
             $table->timestamps();
         });
     }

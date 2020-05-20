@@ -12,9 +12,9 @@ class TipoLavadosSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('wash_types')->insert(['tipo_lavado'=> 'Automático']);
-        DB::table('wash_types')->insert(['tipo_lavado'=> 'Túnel']);
-        DB::table('wash_types')->insert(['tipo_lavado'=> 'Limpieza a mano']);
-        DB::table('wash_types')->insert(['tipo_lavado'=> 'Lavado en seco']);
+        DB::table('wash_types')->insert(['tipo_lavado'=> 'Automático','precio'=>'10']);
+        DB::table('wash_types')->insert(['tipo_lavado'=> 'Túnel','precio'=>'20']);
+        DB::table('wash_types')->insert(['tipo_lavado'=> 'Limpieza a mano','precio'=>'30']);
+        DB::table('wash_types')->insert(['tipo_lavado'=> 'Lavado en seco','precio'=>'40']);
     }
 }

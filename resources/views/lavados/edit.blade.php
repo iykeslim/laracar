@@ -27,6 +27,21 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label for="precio" class="col-md-4 col-form-label text-md-right">Precio</label>
+
+                    <div class="col-md-6">
+                        <input id="precio" type="text" class="form-control @error('precio') is-invalid @enderror"
+                            name="precio" value="{{ old('precio') ?? $lavado->precio }}" autocomplete="precio">
+
+                        @error('precio')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+
                 <div class="row pt-4">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>

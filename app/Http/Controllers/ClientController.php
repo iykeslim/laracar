@@ -30,18 +30,16 @@ class ClientController extends Controller
             'lastname' => 'required|string|max:255',
             'dni' => 'required|string|max:255|unique:users|regex:/([0-9]{2})([.])([0-9]{3})([.])([0-9]{3})$/i',
             'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string',
         ]);
 
         $userPass = Hash::make(request()->validate([
             'password' => 'required|string',
         ])['password']);
 
-        User::create(array_merge(
-            $user,
-            ['password' => $userPass,]
-        ));
-
-        $user_id = DB::table('users')->where('email', request('email'))->value('id');
+        $userCreated = User::create(array_merge($user,[
+            'password'=> $userPass,
+        ]));
 
         $cliente = request()->validate([
             'telefono' => 'required|string',
@@ -51,11 +49,11 @@ class ClientController extends Controller
         Client::create(array_merge(
             $cliente,
             [
-                'user_id' => $user_id,
+                'user_id' => $userCreated->id,
             ]
         ));
 
-        return redirect("/home");
+        return redirect("/cliente");
     }
 
     public function edit(User $user)
@@ -71,6 +69,7 @@ class ClientController extends Controller
         if (!is_null(auth()->user()->client)) {
             $this->authorize('view', $user->client);
         }
+
         $userdata = request()->validate([
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',

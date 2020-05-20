@@ -36,6 +36,7 @@ Route::post('/turno/{user}', 'TurnoController@store');
 Route::get('/turno/{turno}/edit', 'TurnoController@edit');
 Route::patch('/turno/{turno}', 'TurnoController@update');
 Route::delete('/turno/{turno}','TurnoController@delete');
+Route::get('/turno','TurnoController@index');
 
 
 Route::get('/marca','MarcaController@index');

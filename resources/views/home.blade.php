@@ -15,8 +15,9 @@
                     @endif
 
                     <div class="justify-between-content">
-                        <a href="/cliente" class="btn btn-lg btn-orange">Listado de Clientes</a>
                         <a href="/usuario" class="btn btn-lg btn-orange">Listado de Usuarios</a>
+                        <a href="/cliente" class="btn btn-lg btn-orange">Listado de Clientes</a>
+                        <a href="/turno" class="btn btn-lg btn-orange">Listado de Turnos</a>
                         <a href="/marca" class="btn btn-lg btn-orange">Listado de Marcas</a>
                         <a href="/modelo" class="btn btn-lg btn-orange">Listado de Modelos</a>
                         <a href="/veiculo" class="btn btn-lg btn-orange">Listado de Veiculos</a>

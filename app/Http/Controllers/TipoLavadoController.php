@@ -27,6 +27,7 @@ class TipoLavadoController extends Controller
     {
         $lavadoData = request()->validate([
             'tipo_lavado' => ['required', 'string', 'max:255'],
+            'precio' => ['required', 'string', 'max:255'],
         ]);
 
         WashType::create($lavadoData);
@@ -41,6 +42,7 @@ class TipoLavadoController extends Controller
     {
         $lavadoData = request()->validate([
             'tipo_lavado' => ['required', 'string', 'max:255'],
+            'precio' => ['required', 'string', 'max:255'],
         ]);
 
         $lavado->update($lavadoData);
