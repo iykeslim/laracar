@@ -2,8 +2,7 @@
 
 namespace App\Policies;
 
-use App\Client;
-use App\Models\Client as ModelsClient;
+use App\Models\Client;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -19,39 +18,24 @@ class ClientPolicy
      */
     public function viewAny(User $user)
     {
-        $flag = false;
-        die('asaasas');
-        if($user->systemuser){
-            $flag = true;
-        }
-
-        return $flag;
+        return !is_null($user->systemuser);
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return mixed
      */
-    public function view(User $user, ModelsClient $client)
+    public function view(User $user, Client $client)
     {
-        $flag = false;
-
-       if(is_null($user->client)){
-            return true;
+        if (!is_null($user->systemuser)) {
+            return !is_null($user->systemuser);
+        } elseif (!is_null($client)) {
+            return $user->id == $client->user_id;
         }
-
-        if($user->client){
-            if($user->id==$client->user_id){
-                $flag=true;
-            }
-        }else{
-            $flag=true;
-        }
-
-        return $flag;
+        return false;
     }
 
     /**
@@ -62,42 +46,43 @@ class ClientPolicy
      */
     public function create(User $user)
     {
-        die('asasas');
+        return !is_null($user->systemuser);
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return mixed
      */
-    public function update(User $user, ModelsClient $client)
+    public function update(User $user, Client $client)
     {
-        if(!is_null($user->client())){
-            return true;
+        if (!is_null($user->systemuser)) {
+            return !is_null($user->systemuser);
+        } elseif (!is_null($client)) {
+            return $user->id == $client->user_id;
         }
-
-        return $user->id == $client->user_id;
+        return false;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return mixed
      */
     public function delete(User $user, Client $client)
     {
-        //
+        return !is_null($user->systemuser);
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return mixed
      */
     public function restore(User $user, Client $client)
@@ -109,7 +94,7 @@ class ClientPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Client  $client
+     * @param  \App\Models\Client  $client
      * @return mixed
      */
     public function forceDelete(User $user, Client $client)

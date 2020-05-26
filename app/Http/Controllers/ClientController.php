@@ -18,13 +18,35 @@ class ClientController extends Controller
         $this->middleware('auth');
     }
 
+    // Return a dashboard with all Clients
+    public function index()
+    {
+        $this->authorize('viewAny', Client::class);
+        $clients = Client::all();
+        return view('clientes.index', compact('clients'));
+    }
+
+    // Return a dashboard with all data of a Client
+    public function show(Client $client)
+    {
+        $this->authorize('view', $client);
+
+        $turnos = $client->turnos;
+
+        return view('clientes.show', compact('client', 'turnos'));
+    }
+
+    // Return a form view to create a new Client
     public function create()
     {
+        $this->authorize('create',Client::class);
         return view('clientes.create');
     }
 
+    // Function to store the new Client on the DDBB
     public function store()
     {
+        $this->authorize('create',Client::class);
         $user = request()->validate([
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -37,8 +59,8 @@ class ClientController extends Controller
             'password' => 'required|string',
         ])['password']);
 
-        $userCreated = User::create(array_merge($user,[
-            'password'=> $userPass,
+        $userCreated = User::create(array_merge($user, [
+            'password' => $userPass,
         ]));
 
         $cliente = request()->validate([
@@ -53,35 +75,34 @@ class ClientController extends Controller
             ]
         ));
 
-        return redirect("/cliente");
+        return redirect()->route("client.index");
     }
 
-    public function edit(User $user)
+    // Return a form view to edit the Client data
+    public function edit(Client $client)
     {
-        if (!is_null(auth()->user()->client)) {
-            $this->authorize('view', $user->client);
-        }
-        return view('clientes.edit', compact('user'));
+        $this->authorize('update', $client);
+
+        return view('clientes.edit', compact('client'));
     }
 
-    public function update(User $user)
+    // Procedure to save new Client data
+    public function update(Client $client)
     {
-        if (!is_null(auth()->user()->client)) {
-            $this->authorize('view', $user->client);
-        }
+        $this->authorize('update', $client);
 
         $userdata = request()->validate([
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'dni' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id), 'regex:/([0-9]{2})([.])([0-9]{3})([.])([0-9]{3})$/i'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'dni' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($client->user_id), 'regex:/([0-9]{2})([.])([0-9]{3})([.])([0-9]{3})$/i'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($client->user_id)],
         ]);
 
         $userPass = Hash::make(request()->validate([
             'password' => 'required|string',
         ])['password']);
 
-        $user->update(array_merge(
+        $client->user->update(array_merge(
             $userdata,
             [
                 'password' => $userPass,
@@ -93,38 +114,17 @@ class ClientController extends Controller
             'direccion' => 'required|string',
         ]);
 
-        $user->client->update($cliente);
-
-        return redirect("/home");
+        $client->update($cliente);
+        return redirect()->route("client.index");
     }
 
-    public function show(User $user)
+
+    // Procedure to delete Client
+    public function destroy(Client $client)
     {
-        if (!is_null(auth()->user()->client)) {
-            $this->authorize('view', $user->client);
-        }
-
-        $turnos = $user->client->turnos;
-
-        return view('clientes.show', compact('user', 'turnos'));
-    }
-
-    public function delete(User $user)
-    {
-        if (is_null(auth()->user()->systemuser)) {
-            return redirect('/home');
-        }
-        $user->delete();
-        return redirect('/cliente');
-    }
-
-    public function index()
-    {
-        if (is_null(auth()->user()->systemuser)) {
-            return redirect('/home');
-        }
-
-        $clientes = Client::all();
-        return view('clientes.index', compact('clientes'));
+        $this->authorize('delete', $client);
+        Turno::where('client_id',$client->id)->delete();
+        $client->user->delete();
+        return redirect()->route("client.index");
     }
 }

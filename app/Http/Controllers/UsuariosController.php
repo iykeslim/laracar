@@ -18,37 +18,27 @@ class UsuariosController extends Controller
 
     public function index()
     {
-        if (is_null(auth()->user()->systemuser)) {
-            return redirect('/home');
-        } elseif (auth()->user()->systemuser->role != "administrador") {
-            return redirect('/home');
-        }
-        $usuarios = SystemUsers::all()->whereNull('deleted_at');
-        // $usuarios = DB::table('users')->whereNull('deleted_at')->get();
-        // dd($usuarios);
-        return view('usuarios.index', compact('usuarios'));
+        $this->authorize('viewAny', SystemUsers::class);
+        $systemUsers = SystemUsers::all()->whereNull('deleted_at');
+        return view('usuarios.index', compact('systemUsers'));
+    }
+
+    public function show(SystemUsers $systemUser)
+    {
+        $this->authorize('view', $systemUser);
+
+        return view('usuarios.show', compact('systemUser'));
     }
 
     public function create()
     {
-
-        if (is_null(auth()->user()->systemuser)) {
-            return redirect('/home');
-        } elseif (auth()->user()->systemuser->role != "administrador") {
-            return redirect('/home');
-        }
-
+        $this->authorize('create', SystemUsers::class);
         return view('usuarios.create');
     }
 
     public function store()
     {
-
-        if (is_null(auth()->user()->systemuser)) {
-            return redirect('/home');
-        } elseif (auth()->user()->systemuser->role != "administrador") {
-            return redirect('/home');
-        }
+        $this->authorize('create', SystemUsers::class);
 
         $user = request()->validate([
             'name' => 'required|string|max:255',
@@ -79,74 +69,52 @@ class UsuariosController extends Controller
             ]
         ));
 
-        return redirect('/usuario');
+        return redirect()->route('systemUser.index');
     }
 
-    public function show(User $user)
+    public function edit(SystemUsers $systemUser)
     {
-        if (is_null(auth()->user()->systemuser)) {
-            return redirect('/home');
-        } elseif (auth()->user()->systemuser->role != "administrador") {
-            return redirect('/home');
-        }
-
-        return view('usuarios.show', compact('user'));
+        $this->authorize('update',$systemUser);
+        return view('usuarios.edit', compact('systemUser'));
     }
 
-    public function edit(User $user)
+    public function update(SystemUsers $systemUser)
     {
-        if (is_null(auth()->user()->systemuser)) {
-            return redirect('/home');
-        } elseif (auth()->user()->systemuser->role != "administrador") {
-            return redirect('/home');
-        }
-        return view('usuarios.edit', compact('user'));
-    }
 
-    public function update(User $user)
-    {
-        if (is_null(auth()->user()->systemuser)) {
-            return redirect('/home');
-        } elseif (auth()->user()->systemuser->role != "administrador") {
-            return redirect('/home');
-        }
+        $this->authorize('update',$systemUser);
 
         $userdata = request()->validate([
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'dni' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id), 'regex:/([0-9]{2})([.])([0-9]{3})([.])([0-9]{3})$/i'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'dni' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($systemUser->user->id), 'regex:/([0-9]{2})([.])([0-9]{3})([.])([0-9]{3})$/i'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($systemUser->user->id)],
         ]);
 
         $userPass = Hash::make(request()->validate([
             'password' => 'required|string',
         ])['password']);
 
-        $user->update(array_merge(
+        $systemUser->user->update(array_merge(
             $userdata,
             [
                 'password' => $userPass,
             ]
         ));
 
-        $usuario = request()->validate([
-            'role'=>['required','string'],
+        $role = request()->validate([
+            'role' => ['required', 'string'],
         ]);
 
-        $user->systemuser->update($usuario);
+        $systemUser->update($role);
 
-        return redirect('/usuario');
+        return redirect()->route('systemUser.index');
     }
 
-    public function delete(User $user)
+    public function destroy(SystemUsers $systemUser)
     {
-        if (is_null(auth()->user()->systemuser)) {
-            return redirect('/home');
-        } elseif (auth()->user()->systemuser->role != "administrador") {
-            return redirect('/home');
-        }
+        $this->authorize('delete',$systemUser);
 
-        $user->delete();
-        return redirect('/usuario');
+        $systemUser->user->delete();
+        return redirect()->route('systemUser.index');
     }
 }

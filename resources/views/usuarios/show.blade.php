@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col col-12">
             <hr>
-        <h2 class="intro-text text-center">Detalles del usuario  <strong>{{$user->name}}</strong></h2>
+        <h2 class="intro-text text-center">Detalles del usuario  <strong>{{$systemUser->user->name}}</strong></h2>
             <hr>
         </div>
 
@@ -13,20 +13,20 @@
 
             <dl class="row offset-3">
                 <dt class="col-sm-3">Nombre:</dt>
-                <dd class="col-sm-9">{{$user->name}} {{$user->lastname}}.</dd>
+                <dd class="col-sm-9">{{$systemUser->user->name}} {{$systemUser->user->lastname}}.</dd>
 
                 <dt class="col-sm-3">DNI:</dt>
-                <dd class="col-sm-9">{{$user->dni}}</dd>
+                <dd class="col-sm-9">{{$systemUser->user->dni}}</dd>
 
                 <dt class="col-sm-3">Email</dt>
-                <dd class="col-sm-9">{{$user->email}}</dd>
+                <dd class="col-sm-9">{{$systemUser->user->email}}</dd>
 
                 <dt class="col-3">Acciones:</dt>
                 <dd class="col-9 d-flex align-items-baseline">
-                    <a href="/usuario/{{$user->id}}/edit"
+                    <a href="/systemUser/{{$systemUser->id}}/edit"
                         class="mr-5 btn btn-md waves-effect waves-ligh  border border-secondary rounded"
                         style="color: rgb(61, 46, 85)">Editar Perfil</a>
-                        <form action="/usuario/{{$user->id}}" method="POST">
+                        <form action="/systemUser/{{$systemUser->id}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-md waves-effect waves-ligh  border border-secondary rounded"

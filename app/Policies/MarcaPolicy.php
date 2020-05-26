@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Marca;
+use App\Models\Marca;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -18,19 +18,25 @@ class MarcaPolicy
      */
     public function viewAny(User $user)
     {
-
+        if (!is_null($user->systemuser) && $user->systemuser->role == 'administrador') {
+            return true;
+        }
+        return false;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Marca  $marca
+     * @param  \App\Models\Marca  $marca
      * @return mixed
      */
     public function view(User $user, Marca $marca)
     {
-        //
+        if (!is_null($user->systemuser) && $user->systemuser->role == 'administrador') {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -41,55 +47,69 @@ class MarcaPolicy
      */
     public function create(User $user)
     {
-        die('asdasdads');
-        return true; //!(is_null($user->systemuser));
+        if (!is_null($user->systemuser) && $user->systemuser->role == 'administrador') {
+            return true;
+        }
+        return false;
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Marca  $marca
+     * @param  \App\Models\Marca  $marca
      * @return mixed
      */
     public function update(User $user, Marca $marca)
     {
-        //
+        if (!is_null($user->systemuser) && $user->systemuser->role == 'administrador') {
+            return true;
+        }
+        return false;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Marca  $marca
+     * @param  \App\Models\Marca  $marca
      * @return mixed
      */
     public function delete(User $user, Marca $marca)
     {
-        //
+        if (!is_null($user->systemuser) && $user->systemuser->role == 'administrador') {
+            return true;
+        }
+        return false;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Marca  $marca
+     * @param  \App\Models\Marca  $marca
      * @return mixed
      */
     public function restore(User $user, Marca $marca)
     {
-        //
+        if (!is_null($user->systemuser) && $user->systemuser->role == 'administrador') {
+            return true;
+        }
+        return false;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Marca  $marca
+     * @param  \App\Models\Marca  $marca
      * @return mixed
      */
     public function forceDelete(User $user, Marca $marca)
     {
-        //
+        if (!is_null($user->systemuser) && $user->systemuser->role == 'administrador') {
+            return true;
+        }
+        return false;
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Turno;
+use App\Models\VehicleType;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TurnoPolicy
+class VehicleTypePolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class TurnoPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\Turno  $turno
+     * @param  \App\Models\VehicleType  $vehicleType
      * @return mixed
      */
-    public function view(User $user, Turno $turno)
+    public function view(User $user, VehicleType $vehicleType)
     {
         return !is_null($user->systemuser);
     }
@@ -41,41 +41,41 @@ class TurnoPolicy
      */
     public function create(User $user)
     {
-        return !is_null($user->systemuser());
+        return !is_null($user->systemuser);
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\Turno  $turno
+     * @param  \App\Models\VehicleType  $vehicleType
      * @return mixed
      */
-    public function update(User $user, Turno $turno)
+    public function update(User $user, VehicleType $vehicleType)
     {
-        return !is_null($user->systemuser) ? true : $user->id == $turno->client->user_id;
+        return !is_null($user->systemuser);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\Turno  $turno
+     * @param  \App\Models\VehicleType  $vehicleType
      * @return mixed
      */
-    public function delete(User $user, Turno $turno)
+    public function delete(User $user, VehicleType $vehicleType)
     {
-        return !is_null($user->systemuser) ? true : $user->id == $turno->client->user_id;
+        return !is_null($user->systemuser);
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\Turno  $turno
+     * @param  \App\Models\VehicleType  $vehicleType
      * @return mixed
      */
-    public function restore(User $user, Turno $turno)
+    public function restore(User $user, VehicleType $vehicleType)
     {
         //
     }
@@ -84,10 +84,10 @@ class TurnoPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\Turno  $turno
+     * @param  \App\Models\VehicleType  $vehicleType
      * @return mixed
      */
-    public function forceDelete(User $user, Turno $turno)
+    public function forceDelete(User $user, VehicleType $vehicleType)
     {
         //
     }

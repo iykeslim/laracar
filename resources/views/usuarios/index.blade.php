@@ -8,7 +8,7 @@
         <h2 class="intro-text text-center">Listado de Usuarios</strong></h2>
             <hr>
         </div>
-        <div><a href="/usuario/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Usuario</a></div>
+        <div><a href="/systemUser/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Usuario</a></div>
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
             <table class="table table-bordered table-striped">
@@ -18,26 +18,28 @@
                         <th>Apellido</th>
                         <th>DNI</th>
                         <th>Email</th>
+                        <th>Rol</th>
                         <th>Detalles</th>
                         <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($usuarios as $usuario)
+                    @foreach ($systemUsers as $systemUser)
                     <tr>
-                        <td>{{$usuario->user->name ?? 'lala'}}</td>
-                        <td>{{$usuario->user->lastname ?? 'lala'}}</td>
-                        <td>{{$usuario->user->dni ?? 'lala'}}</td>
-                        <td>{{$usuario->user->email ?? 'lala'}}</td>
-                        <td><a href="/usuario/{{$usuario->user_id}}"
+                        <td>{{$systemUser->user->name ?? 'lala'}}</td>
+                        <td>{{$systemUser->user->lastname ?? 'lala'}}</td>
+                        <td>{{$systemUser->user->dni ?? 'lala'}}</td>
+                        <td>{{$systemUser->user->email ?? 'lala'}}</td>
+                        <td>{{$systemUser->role ?? 'lala'}}</td>
+                        <td><a href="/systemUser/{{$systemUser->id}}"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Detalle</a></td>
                         <td>
-                            <form action="/usuario/{{$usuario->user_id}}" method="POST">
+                            <form action="/systemUser/{{$systemUser->id}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(61, 46, 85)">Eliminar</button>
+                            style="color: rgb(61, 46, 85)"  onclick="return confirm('Está seguro de eliminar esta Usuario?');">Eliminar</button>
                             </td>
                         </form>
 

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-<form action="/cliente/{{$user->id}}" method="POST">
+<form action="/client/{{$client->id}}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row">
@@ -17,7 +17,7 @@
 
                     <div class="col-md-6">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            name="name" value="{{ old('name') ?? $user->name }}" autocomplete="name">
+                            name="name" value="{{ old('name') ?? $client->user->name }}" autocomplete="name">
 
                         @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
 
                     <div class="col-md-6">
                         <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror"
-                            name="lastname" value="{{ old('lastname') ?? $user->lastname }}" autocomplete="lastname">
+                            name="lastname" value="{{ old('lastname') ?? $client->user->lastname }}" autocomplete="lastname">
 
                         @error('lastname')
                         <span class="invalid-feedback" role="alert">
@@ -47,7 +47,7 @@
 
                     <div class="col-md-6">
                         <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni"
-                            value="{{ old('dni') ?? $user->dni }}" autocomplete="dni">
+                            value="{{ old('dni') ?? $client->user->dni }}" autocomplete="dni">
 
                         @error('dni')
                         <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
 
                     <div class="col-md-6">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                            name="email" value="{{ old('email') ?? $user->email }}" required autocomplete="email" autofocus>
+                            name="email" value="{{ old('email') ?? $client->user->email }}" required autocomplete="email" autofocus>
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -78,7 +78,7 @@
                     <div class="col-md-6">
                         <input id="telefono" type="telefono"
                             class="form-control @error('telefono') is-invalid @enderror" name="telefono"
-                            value="{{ old('telefono') ?? $user->client->telefono }}" autocomplete="telefono">
+                            value="{{ old('telefono') ?? $client->telefono }}" autocomplete="telefono">
 
                         @error('telefono')
                         <span class="invalid-feedback" role="alert">
@@ -94,7 +94,7 @@
                     <div class="col-md-6">
                         <input id="direccion" type="text"
                             class="form-control @error('direccion') is-invalid @enderror" name="direccion"
-                            value="{{ old('direccion') ?? $user->client->direccion }}" autocomplete="direccion">
+                            value="{{ old('direccion') ?? $client->direccion }}" autocomplete="direccion">
 
                         @error('direccion')
                         <span class="invalid-feedback" role="alert">

@@ -9,7 +9,7 @@
             <hr>
         </div>
 
-        <div><a href="/lavado/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Lavado</a></div>
+        <div><a href="/washType/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Lavado</a></div>
 
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
@@ -23,19 +23,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($lavados as $lavado)
+                    @foreach ($washTypes as $washType)
                     <tr>
-                        <td>{{$lavado->tipo_lavado}}</td>
-                        <td>{{$lavado->precio}}</td>
-                        <td><a href="/lavado/{{$lavado->id}}/edit"
+                        <td>{{$washType->tipo_lavado}}</td>
+                        <td>{{$washType->precio}}</td>
+                        <td><a href="/washType/{{$washType->id}}/edit"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Editar</a></td>
                         <td>
-                            <form action="/lavado/{{$lavado->id}}" method="POST">
+                            <form action="/washType/{{$washType->id}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(61, 46, 85)">Eliminar</button>
+                            style="color: rgb(61, 46, 85)"  onclick="return confirm('Está seguro de eliminar este Lavado?');">Eliminar</button>
                             </td>
                         </form>
 

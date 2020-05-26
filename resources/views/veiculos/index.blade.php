@@ -9,7 +9,7 @@
             <hr>
         </div>
 
-        <div><a href="/veiculo/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Veiculo</a></div>
+        <div><a href="/vehicleType/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Veiculo</a></div>
 
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
@@ -22,18 +22,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($veiculos as $veiculo)
+                    @foreach ($vehicleTypes as $vehicleType)
                     <tr>
-                        <td>{{$veiculo->tipo_veiculo}}</td>
-                        <td><a href="/veiculo/{{$veiculo->id}}/edit"
+                        <td>{{$vehicleType->tipo_veiculo}}</td>
+                        <td><a href="/vehicleType/{{$vehicleType->id}}/edit"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Editar</a></td>
                         <td>
-                            <form action="/veiculo/{{$veiculo->id}}" method="POST">
+                            <form action="/vehicleType/{{$vehicleType->id}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(61, 46, 85)">Eliminar</button>
+                            style="color: rgb(61, 46, 85)" onclick="return confirm('Está seguro de eliminar esta Vehiculo?');">Eliminar</button>
                             </td>
                         </form>
 

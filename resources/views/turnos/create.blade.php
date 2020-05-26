@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/turno/{{$user->id}}" method="POST">
+    <form action="/turno" method="POST">
         @csrf
         <div class="row">
             <div class="col-8 offset-2">
@@ -145,7 +145,8 @@
                     <div class="col-md-6">
                         <select name="lavado" id="lavado" class="form-control @error('lavado') is-invalid @enderror">
                             @foreach ($tipo_lavados as $tipo_lavado)
-                            <option value="{{$tipo_lavado->tipo_lavado}}">{{$tipo_lavado->tipo_lavado}}: ${{$tipo_lavado->precio}}</option>
+                            <option value="{{$tipo_lavado->tipo_lavado}}">{{$tipo_lavado->tipo_lavado}}:
+                                ${{$tipo_lavado->precio}}</option>
                             @endforeach
                         </select>
                         {{-- <input id="lavado" type="text" class="form-control @error('lavado') is-invalid @enderror"
@@ -159,15 +160,17 @@
                     </div>
                 </div>
 
+                <input type="hidden" name="client_id" value="{{$client_id}}">
+
                 <div class="row pt-4">
                     <div class="col col-7 offset-3 d-flex align-items-baseline justify-content-between">
 
-                        <button type="submit" class="btn btn-primary" style="color: rgb(233, 225, 235)">Registrar</button>
+                        <button type="submit" class="btn btn-primary"
+                            style="color: rgb(233, 225, 235)">Registrar</button>
 
-                        <a href="/cliente/{{$user->id}}"
-                            class="btn btn-md btn-primary rounded"
-                          style="color: rgb(233, 225, 235)" >Regresar</a>
-                        </div>
+                        <a href="/client/{{$client_id}}" class="btn btn-md btn-primary rounded"
+                            style="color: rgb(233, 225, 235)">Regresar</a>
+                    </div>
                 </div>
 
             </div>

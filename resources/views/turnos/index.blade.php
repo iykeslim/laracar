@@ -63,7 +63,7 @@
                                 @method('DELETE')
                                 <button type="submit"
                                     class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                                    style="color: rgb(61, 46, 85)">Cancelar</button>
+                                    style="color: rgb(61, 46, 85)" onclick="return confirm('Está seguro de eliminar esta Truno?');">Cancelar</button>
                         </td>
                         </form>
                     </tr>

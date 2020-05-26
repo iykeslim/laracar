@@ -14,43 +14,49 @@ class TipoAutoController extends Controller
 
     public function index()
     {
-        $veiculos = VehicleType::all();
-        return view('veiculos.index', compact('veiculos'));
+        $this->authorize('viewAny',VehicleType::class);
+        $vehicleTypes = VehicleType::all();
+        return view('veiculos.index', compact('vehicleTypes'));
     }
 
     public function create()
     {
+        $this->authorize('create',VehicleType::class);
         return view('veiculos.create');
     }
 
     public function store()
     {
+        $this->authorize('create',VehicleType::class);
         $veiculoData = request()->validate([
             'tipo_veiculo' => ['required', 'string', 'max:255'],
         ]);
 
         VehicleType::create($veiculoData);
-        return redirect('/veiculo');
+        return redirect()->route('vehicleType.index');
     }
-    public function edit(VehicleType $veiculo)
+    public function edit(VehicleType $vehicleType)
     {
-        return view('veiculos.edit', compact('veiculo'));
+        $this->authorize('update',$vehicleType);
+        return view('veiculos.edit', compact('vehicleType'));
     }
 
-    public function update(VehicleType $veiculo)
+    public function update(VehicleType $vehicleType)
     {
-        $veiculoData = request()->validate([
+        $this->authorize('update',$vehicleType);
+        $vehicleTypeData = request()->validate([
             'tipo_veiculo' => ['required', 'string', 'max:255'],
         ]);
 
-        $veiculo->update($veiculoData);
+        $vehicleType->update($vehicleTypeData);
 
-        return redirect('/veiculo');
+        return redirect()->route('vehicleType.index');
     }
 
-    public function delete(VehicleType $veiculo)
+    public function destroy(VehicleType $vehicleType)
     {
-        $veiculo->delete();
-        return redirect('/veiculo');
+        $this->authorize('delete',$vehicleType);
+        $vehicleType->delete();
+        return redirect()->route('vehicleType.index');
     }
 }

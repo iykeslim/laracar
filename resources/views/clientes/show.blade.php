@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col col-12">
             <hr>
-        <h2 class="intro-text text-center">Detalles del cliente  <strong>{{$user->name}}</strong></h2>
+        <h2 class="intro-text text-center">Detalles del cliente  <strong>{{$client->user->name}}</strong></h2>
             <hr>
         </div>
 
@@ -13,28 +13,31 @@
 
             <dl class="row offset-3">
                 <dt class="col-sm-3">Nombre:</dt>
-                <dd class="col-sm-9">{{$user->name}} {{$user->lastname}}.</dd>
+                <dd class="col-sm-9">{{$client->user->name}} {{$client->user->lastname}}.</dd>
 
                 <dt class="col-sm-3">DNI:</dt>
-                <dd class="col-sm-9">{{$user->dni}}</dd>
+                <dd class="col-sm-9">{{$client->user->dni}}</dd>
 
                 <dt class="col-sm-3">Email</dt>
-                <dd class="col-sm-9">{{$user->email}}</dd>
+                <dd class="col-sm-9">{{$client->user->email}}</dd>
 
                 <dt class="col-sm-3 text-truncate">Teléfono</dt>
-                <dd class="col-sm-9">{{$user->client->telefono}}</dd>
+                <dd class="col-sm-9">{{$client->user->client->telefono}}</dd>
 
                 <dt class="col-sm-3">Dirección</dt>
-                <dd class="col-sm-9">{{$user->client->direccion}}</dd>
+                <dd class="col-sm-9">{{$client->user->client->direccion}}</dd>
 
                 <dt class="col-3">Acciones:</dt>
                 <dd class="col-9 d-flex align-items-baseline">
-                    <a href="/cliente/{{$user->id}}/edit"
+                    <a href="/client/{{$client->id}}/edit"
                         class="mr-5 btn btn-md waves-effect waves-ligh  border border-secondary rounded"
                         style="color: rgb(61, 46, 85)">Editar Perfil</a>
-                    <a href="/turno/{{$user->id}}/create"
-                        class=" btn btn-md waves-effect waves-ligh  border border-secondary rounded"
-                        style="color: rgb(82, 38, 38)">Reservar Turno</a>
+                        <form action="/turno/create" method="GET">
+                            @csrf
+                            <input type="hidden" name="client_id" value="{{$client->id}}">
+                            <button type="submit" class="btn btn-md waves-effect waves-ligh  border border-secondary rounded"
+                            style="color: rgb(82, 38, 38)">Reserver Turno</button>
+                        </form>
                 </dd>
             </dl>
 
@@ -80,9 +83,9 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(61, 46, 85)">Cancelar</button>
-                            </td>
+                            style="color: rgb(61, 46, 85)" onclick="return confirm('Está seguro de eliminar este Turno?');">Cancelar</button>
                         </form>
+                    </td>
 
                     </tr>
                     @endforeach

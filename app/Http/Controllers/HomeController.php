@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         if(auth()->user()->client){
-           return redirect('/cliente/'.auth()->user()->id);
+        return redirect()->route('client.show',['client'=>auth()->user()->client->id]);
         }
         return view('home');
     }

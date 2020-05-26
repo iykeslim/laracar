@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/lavado/{{$lavado->id}}" method="POST">
+    <form action="/washType/{{$washType->id}}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row">
@@ -17,7 +17,7 @@
 
                     <div class="col-md-6">
                         <input id="tipo_lavado" type="text" class="form-control @error('tipo_lavado') is-invalid @enderror"
-                            name="tipo_lavado" value="{{ old('tipo_lavado') ?? $lavado->tipo_lavado }}" autocomplete="tipo_lavado">
+                            name="tipo_lavado" value="{{ old('tipo_lavado') ?? $washType->tipo_lavado }}" autocomplete="tipo_lavado">
 
                         @error('tipo_lavado')
                         <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
 
                     <div class="col-md-6">
                         <input id="precio" type="text" class="form-control @error('precio') is-invalid @enderror"
-                            name="precio" value="{{ old('precio') ?? $lavado->precio }}" autocomplete="precio">
+                            name="precio" value="{{ old('precio') ?? $washType->precio }}" autocomplete="precio">
 
                         @error('precio')
                         <span class="invalid-feedback" role="alert">

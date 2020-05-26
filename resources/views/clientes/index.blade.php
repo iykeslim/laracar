@@ -8,7 +8,7 @@
         <h2 class="intro-text text-center">Listado de Clientes</strong></h2>
             <hr>
         </div>
-        <div><a href="/cliente/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Cliente</a></div>
+        <div><a href="/client/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Cliente</a></div>
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
             <table class="table table-bordered table-striped">
@@ -23,21 +23,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($clientes as $cliente)
+                    @foreach ($clients as $client)
                     <tr>
-                        <td>{{$cliente->user->name}}</td>
-                        <td>{{$cliente->user->lastname}}</td>
-                        <td>{{$cliente->user->dni}}</td>
-                        <td>{{$cliente->user->email}}</td>
-                        <td><a href="/cliente/{{$cliente->user_id}}"
+                        <td>{{$client->user->name}}</td>
+                        <td>{{$client->user->lastname}}</td>
+                        <td>{{$client->user->dni}}</td>
+                        <td>{{$client->user->email}}</td>
+                        <td><a href="/client/{{$client->id}}"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Detalle</a></td>
                         <td>
-                            <form action="/cliente/{{$cliente->user_id}}" method="POST">
+                            <form action="/client/{{$client->id}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(61, 46, 85)">Eliminar</button>
+                            style="color: rgb(61, 46, 85)" onclick="return confirm('Está seguro de eliminar este Cliente? También se eliminaran los turnos reservados a su nombre');">Eliminar</button>
                             </td>
                         </form>
 

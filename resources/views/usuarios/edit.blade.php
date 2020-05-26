@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-<form action="/usuario/{{$user->id}}" method="POST">
+<form action="/systemUser/{{$systemUser->id}}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row">
@@ -10,7 +10,7 @@
 
                 <div class="col col-12">
                     <hr>
-                    <h2 class="intro-text text-center">Editar Usuario</h2>
+                <h2 class="intro-text text-center">Editar Usuario : {{$systemUser->user->name}} {{ $systemUser->user->lastname}}</h2>
                     <hr>
                 </div>
 
@@ -19,7 +19,7 @@
 
                     <div class="col-md-6">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            name="name" value="{{ old('name') ?? $user->name }}" autocomplete="name">
+                            name="name" value="{{ old('name') ?? $systemUser->user->name }}" autocomplete="name">
 
                         @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -34,7 +34,7 @@
 
                     <div class="col-md-6">
                         <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror"
-                            name="lastname" value="{{ old('lastname') ?? $user->lastname }}" autocomplete="lastname">
+                            name="lastname" value="{{ old('lastname') ?? $systemUser->user->lastname }}" autocomplete="lastname">
 
                         @error('lastname')
                         <span class="invalid-feedback" role="alert">
@@ -49,7 +49,7 @@
 
                     <div class="col-md-6">
                         <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni"
-                            value="{{ old('dni') ?? $user->dni }}" autocomplete="dni">
+                            value="{{ old('dni') ?? $systemUser->user->dni }}" autocomplete="dni">
 
                         @error('dni')
                         <span class="invalid-feedback" role="alert">
@@ -85,7 +85,7 @@
 
                     <div class="col-md-6">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                            name="email" value="{{ old('email') ?? $user->email }}" required autocomplete="email">
+                            name="email" value="{{ old('email') ?? $systemUser->user->email }}" required autocomplete="email">
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">

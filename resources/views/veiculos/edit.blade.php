@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/veiculo/{{$veiculo->id}}" method="POST">
+    <form action="/vehicleType/{{$vehicleType->id}}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row">
@@ -17,7 +17,7 @@
 
                     <div class="col-md-6">
                         <input id="tipo_veiculo" type="text" class="form-control @error('tipo_veiculo') is-invalid @enderror"
-                            name="tipo_veiculo" value="{{ old('tipo_veiculo') ?? $veiculo->tipo_veiculo }}" autocomplete="tipo_veiculo">
+                            name="tipo_veiculo" value="{{ old('tipo_veiculo') ?? $vehicleType->tipo_veiculo }}" autocomplete="tipo_veiculo">
 
                         @error('tipo_veiculo')
                         <span class="invalid-feedback" role="alert">
