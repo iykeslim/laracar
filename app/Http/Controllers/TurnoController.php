@@ -13,6 +13,7 @@ use App\Rules\disponible;
 use App\Rules\sunday;
 use App\Rules\timeNotBeforeNow;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -32,7 +33,7 @@ class TurnoController extends Controller
 
         $fecha = request()->get('fecha');
         if ($fecha) {
-            $turnos = Turno::where('fecha', $fecha)->paginate(5);
+            $turnos = Turno::where('fecha_turno','like', $fecha.'%')->paginate(5);
         } else {
             $turnos = Turno::paginate(5);
         }
@@ -62,11 +63,14 @@ class TurnoController extends Controller
             $identificador = 'T' . sprintf("%'.06d", 1);
         }
 
+        $date = Carbon::createFromFormat('Y-m-d h:i A', request('fecha') . request('hora'))->toDateTimeString();
+
         $turno = Validator::make(array_merge(
             request()->all(),
             [
                 'identificador' => $identificador,
                 'precio' => DB::table('wash_types')->where('tipo_lavado', request()['lavado'])->value('precio'),
+                'fecha_turno' => $date,
             ]
         ), [
             'tipo' => ['required'],
@@ -76,8 +80,7 @@ class TurnoController extends Controller
             'precio' => ['required'],
             'color' => ['required'],
             'matricula' => ['required', 'regex:/([A-Z]{2})([0-9]{3})([A-Z]{2})$|([A-Z]{3})([0-9]{3})$/i'],
-            'fecha' => ['required', 'date', 'after_or_equal:yesterday', new sunday()],
-            'hora' => ['required', 'string', new disponible(null), new timeNotBeforeNow()],
+            'fecha_turno' => ['required', Rule::unique('turnos')],
             'identificador' => ['unique:turnos'],
             'client_id' => ['required'],
         ])->validate();
@@ -98,30 +101,35 @@ class TurnoController extends Controller
         $modelos = ModelType::all();
         $tipos_autos = VehicleType::all();
         $tipo_lavados = WashType::all();
-        return view('turnos.edit', compact('turno', 'horarios', 'marcas', 'modelos', 'tipos_autos', 'tipo_lavados'));
+        $fecha = Carbon::parse($turno->fecha_turno)->translatedFormat('Y-m-d');
+        return view('turnos.edit', compact('turno', 'horarios', 'fecha', 'marcas', 'modelos', 'tipos_autos', 'tipo_lavados'));
     }
 
     public function update(Turno $turno)
     {
         $this->authorize('update', $turno);
 
+        $date = Carbon::createFromFormat('Y-m-d h:i A', request('fecha') . request('hora'))->toDateTimeString();
+
+        // dd(DB::table('wash_types')->where('tipo_lavado', request()['lavado'])->value('precio'));
+
         $update_turno = Validator::make(array_merge(
             request()->all(),
             [
                 'precio' => DB::table('wash_types')->where('tipo_lavado', request()['lavado'])->value('precio'),
-            ]
-        ), [
-            'tipo' => ['required'],
-            'marca' => ['required'],
-            'modelo' => ['required'],
-            'lavado' => ['required'],
-            'precio' => ['required'],
-            'color' => ['required'],
-            'matricula' => ['required', 'regex:/([A-Z]{2})([0-9]{3})([A-Z]{2})$|([A-Z]{3})([0-9]{3})$/i'],
-            'fecha' => ['required', 'date', 'after_or_equal:yesterday', new sunday()],
-            'hora' => ['required', 'string', new disponible($turno->id), new timeNotBeforeNow()],
-            'identificador' => ['unique:turnos', Rule::unique('trunos')->ignore($turno->id)],
-        ])->validate();
+                'fecha_turno' => $date,
+                ]
+            ), [
+                'tipo' => ['required'],
+                'marca' => ['required'],
+                'modelo' => ['required'],
+                'lavado' => ['required'],
+                'precio' => ['required'],
+                'color' => ['required'],
+                'matricula' => ['required', 'regex:/([A-Z]{2})([0-9]{3})([A-Z]{2})$|([A-Z]{3})([0-9]{3})$/i'],
+                'fecha_turno' => ['required', Rule::unique('turnos')->ignore($turno->id)], // new sunday()],
+                'identificador' => ['unique:turnos', Rule::unique('trunos')->ignore($turno->id)],
+                ])->validate();
 
         $turno->update($update_turno);
 

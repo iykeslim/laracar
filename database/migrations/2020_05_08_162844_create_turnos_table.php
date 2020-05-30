@@ -24,8 +24,7 @@ class CreateTurnosTable extends Migration
             $table->string('precio');
             $table->string('color');
             $table->string('matricula');
-            $table->date('fecha');
-            $table->string('hora');
+            $table->date('fecha_turno')->unique();
             $table->softDeletes();
             $table->timestamps();
 

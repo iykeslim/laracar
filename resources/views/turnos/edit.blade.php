@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/turno/{{$turno->id}}" method="POST">
+    <form action="{{route('turno.update',['turno'=>$turno->id])}}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row">
@@ -109,7 +109,7 @@
 
                     <div class="col-md-6">
                         <input id="fecha" type="date" class="form-control @error('fecha') is-invalid @enderror"
-                            name="fecha" value="{{ old('fecha') ?? $turno->fecha }}" autocomplete="fecha">
+                            name="fecha" value="{{ old('fecha') ?? $fecha }}" autocomplete="fecha">
 
                         @error('fecha')
                         <span class="invalid-feedback" role="alert">
@@ -163,9 +163,9 @@
                 <div class="row pt-4">
                     <div class="col col-7 offset-3 d-flex align-items-baseline justify-content-between">
 
-                        <button type="submit" class="btn btn-primary" style="color: rgb(233, 225, 235)">Registrar</button>
+                        <button type="submit" class="btn btn-primary" style="color: rgb(233, 225, 235)">Actualizar</button>
 
-                        <a href="/cliente/{{$turno->id}}"
+                        <a href="{{route('client.show',['client'=>$turno->client_id])}}"
                             class="btn btn-md btn-primary rounded"
                           style="color: rgb(233, 225, 235)" >Regresar</a>
                         </div>

@@ -54,7 +54,6 @@
                         <th>Color</th>
                         <th>Matricula</th>
                         <th>Fecha</th>
-                        <th>Hora</th>
                         <th>Lavado</th>
                         <th>Precio</th>
                         <th>Editar</th>
@@ -70,8 +69,7 @@
                         <td>{{$turno->modelo}}</td>
                         <td>{{$turno->color}}</td>
                         <td>{{$turno->matricula}}</td>
-                        <td>{{$turno->fecha}}</td>
-                        <td>{{$turno->hora}}</td>
+                        <td>{{$turno->fecha_turno}}</td>
                         <td>{{$turno->lavado}}</td>
                         <td>{{$turno->precio}}</td>
                         <td><a href="/turno/{{$turno->id}}/edit"

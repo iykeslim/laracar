@@ -10,21 +10,21 @@
         </div>
 
         <div class="row col col-3 mb-2" style="left: 41%">
-                <form class="form-inline">
+            <form class="form-inline">
 
-                    <input name="fecha" class="form-control mr-sm-2" type="date" placeholder="Buscar por fecha"
-                        aria-label="Search">
+                <input name="fecha" class="form-control mr-sm-2" type="date" placeholder="Buscar por fecha"
+                    aria-label="Search">
 
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar</button>
-                </form>
-                <hr>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar</button>
+            </form>
+            <hr>
         </div>
 
         <div></div>
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
             <table class="table table-bordered table-striped">
-                <thead class="">
+                <thead class="d-flex">
                     <tr>
                         <th>Identificador</th>
                         <th>Cliente</th>
@@ -33,10 +33,10 @@
                         <th>Modelo</th>
                         <th>Color</th>
                         <th>Matricula</th>
-                        <th>Fecha</th>
                         <th>Hora</th>
                         <th>Lavado</th>
                         <th>Precio</th>
+                        <th colspan="3" style="text-align: center;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,23 +49,30 @@
                         <td>{{$turno->modelo}}</td>
                         <td>{{$turno->color}}</td>
                         <td>{{$turno->matricula}}</td>
-                        <td>{{$turno->fecha}}</td>
-                        <td>{{$turno->hora}}</td>
+                        <td>{{$turno->fecha_turno}}</td>
                         <td>{{$turno->lavado}}</td>
                         <td>{{$turno->precio}}</td>
-                        <td><a href="/turno/{{$turno->id}}/edit"
-                                class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                                style="color: rgb(121, 61, 22)">Editar</a></td>
                         <td>
-
-                            <form action="/turno/{{$turno->id}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                                    style="color: rgb(61, 46, 85)" onclick="return confirm('Está seguro de eliminar esta Truno?');">Cancelar</button>
+                            <a href="{{route('turno.edit',['turno'=>$turno->id])}}"
+                                class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
+                                style="color: rgb(121, 61, 22)">Recepcionar</a>
                         </td>
-                        </form>
+                        <td>
+                            <a href="{{route('turno.edit',['turno'=>$turno->id])}}"
+                                class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
+                                style="color: rgb(121, 61, 22)">Editar</a>
+                        </td>
+
+                        <td>
+                        <form action="{{route('turno.destroy',['turno'=>$turno->id])}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
+                                style="color: rgb(61, 46, 85)"
+                                onclick="return confirm('Está seguro de eliminar esta Truno?');">Cancelar</button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
 

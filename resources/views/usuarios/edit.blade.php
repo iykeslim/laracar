@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-<form action="/systemUser/{{$systemUser->id}}" method="POST">
+<form action="{{route('systemUser.update',['systemUser'=>$systemUser->id])}}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row">

@@ -8,7 +8,7 @@
         <h2 class="intro-text text-center">Listado de Usuarios</strong></h2>
             <hr>
         </div>
-        <div><a href="/systemUser/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Usuario</a></div>
+        <div><a href="{{route('systemUser.create')}}" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Usuario</a></div>
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
             <table class="table table-bordered table-striped">
@@ -31,11 +31,11 @@
                         <td>{{$systemUser->user->dni ?? 'lala'}}</td>
                         <td>{{$systemUser->user->email ?? 'lala'}}</td>
                         <td>{{$systemUser->role ?? 'lala'}}</td>
-                        <td><a href="/systemUser/{{$systemUser->id}}"
+                        <td><a href="{{route('systemUser.show',['systemUser'=>$systemUser->id])}}"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Detalle</a></td>
                         <td>
-                            <form action="/systemUser/{{$systemUser->id}}" method="POST">
+                            <form action="{{route('systemUser.destroy',['systemUser'=>$systemUser->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"

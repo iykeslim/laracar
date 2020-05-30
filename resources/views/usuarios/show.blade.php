@@ -23,10 +23,10 @@
 
                 <dt class="col-3">Acciones:</dt>
                 <dd class="col-9 d-flex align-items-baseline">
-                    <a href="/systemUser/{{$systemUser->id}}/edit"
+                    <a href="{{route('systemUser.edit',['systemUser'=>$systemUser->id])}}"
                         class="mr-5 btn btn-md waves-effect waves-ligh  border border-secondary rounded"
                         style="color: rgb(61, 46, 85)">Editar Perfil</a>
-                        <form action="/systemUser/{{$systemUser->id}}" method="POST">
+                        <form action="{{route('systemUser.destroy',['systemUser'=>$systemUser->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-md waves-effect waves-ligh  border border-secondary rounded"

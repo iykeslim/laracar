@@ -15,13 +15,13 @@
                     @endif
 
                     <div class="justify-between-content">
-                        <a href="/systemUser" class="btn btn-lg btn-orange">Listado de Usuarios</a>
-                        <a href="/client" class="btn btn-lg btn-orange">Listado de Clientes</a>
-                        <a href="/turno" class="btn btn-lg btn-orange">Listado de Turnos</a>
-                        <a href="/marca" class="btn btn-lg btn-orange">Listado de Marcas</a>
-                        <a href="/modelo" class="btn btn-lg btn-orange">Listado de Modelos</a>
-                        <a href="/vehicleType" class="btn btn-lg btn-orange">Listado de Veiculos</a>
-                        <a href="/washType" class="btn btn-lg btn-orange">Listado de Lavados</a>
+                        <a href="{{route('systemUser.index')}}" class="btn btn-lg btn-orange">Listado de Usuarios</a>
+                        <a href="{{route('client.index')}}" class="btn btn-lg btn-orange">Listado de Clientes</a>
+                        <a href="{{route('turno.index')}}" class="btn btn-lg btn-orange">Listado de Turnos</a>
+                        <a href="{{route('marca.index')}}" class="btn btn-lg btn-orange">Listado de Marcas</a>
+                        <a href="{{route('modelo.index')}}" class="btn btn-lg btn-orange">Listado de Modelos</a>
+                        <a href="{{route('vehicleType.index')}}" class="btn btn-lg btn-orange">Listado de Veiculos</a>
+                        <a href="{{route('washType.index')}}" class="btn btn-lg btn-orange">Listado de Lavados</a>
                     </div>
                 </div>
             </div>
