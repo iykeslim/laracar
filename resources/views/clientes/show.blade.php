@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col col-12">
             <hr>
-        <h2 class="intro-text text-center">Detalles del cliente  <strong>{{$client->user->name}}</strong></h2>
+            <h2 class="intro-text text-center">Detalles del cliente <strong>{{$client->user->name}}</strong></h2>
             <hr>
         </div>
 
@@ -29,15 +29,16 @@
 
                 <dt class="col-3">Acciones:</dt>
                 <dd class="col-9 d-flex align-items-baseline">
-                    <a href="/client/{{$client->id}}/edit"
+                    <a href="{{route('client.edit',['client'=>$client->id])}}"
                         class="mr-5 btn btn-md waves-effect waves-ligh  border border-secondary rounded"
                         style="color: rgb(61, 46, 85)">Editar Perfil</a>
-                        <form action="/turno/create" method="GET">
-                            @csrf
-                            <input type="hidden" name="client_id" value="{{$client->id}}">
-                            <button type="submit" class="btn btn-md waves-effect waves-ligh  border border-secondary rounded"
+                    <form action="{{route('turno.create')}}" method="GET">
+                        @csrf
+                        <input type="hidden" name="client_id" value="{{$client->id}}">
+                        <button type="submit"
+                            class="btn btn-md waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(82, 38, 38)">Reserver Turno</button>
-                        </form>
+                    </form>
                 </dd>
             </dl>
 
@@ -64,26 +65,31 @@
                     @foreach ($turnos as $turno)
                     <tr>
                         <td>{{$turno->identificador}}</td>
-                        <td>{{$turno->tipo}}</td>
-                        <td>{{$turno->marca}}</td>
-                        <td>{{$turno->modelo}}</td>
+                        <td>{{$turno->vehicle_types->tipo_veiculo}}</td>
+                        <td>{{$turno->marcas->tipo_marca}}</td>
+                        <td>{{$turno->model_types->tipo_modelo}}</td>
                         <td>{{$turno->color}}</td>
                         <td>{{$turno->matricula}}</td>
                         <td>{{$turno->fecha_turno}}</td>
-                        <td>{{$turno->lavado}}</td>
+                        <td>{{$turno->wash_types->tipo_lavado}}</td>
                         <td>{{$turno->precio}}</td>
-                        <td><a href="/turno/{{$turno->id}}/edit"
-                            class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(121, 61, 22)">Editar</a></td>
                         <td>
 
-                            <form action="/turno/{{$turno->id}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(61, 46, 85)" onclick="return confirm('Está seguro de eliminar este Turno?');">Cancelar</button>
-                        </form>
-                    </td>
+                            <a href="{{route('turno.edit',['turno'=>$turno->id])}}" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded
+                                @if ($turno->recepcionado) disabled @endif" style="color: rgb(121, 61, 22)">Editar</a>
+
+                        </td>
+                        <td>
+
+                            <form action="{{route('turno.destroy',['turno'=>$turno->id])}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" @if ($turno->recepcionado) disabled @endif
+                                    class="btn btn-sm waves-effect waves-ligh border border-secondary rounded"
+                                    style="color: rgb(61, 46, 85)" onclick="return confirm('Está seguro de eliminar este
+                                    Turno?');">Cancelar</button>
+                            </form>
+                        </td>
 
                     </tr>
                     @endforeach

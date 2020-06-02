@@ -9,7 +9,7 @@
             <hr>
         </div>
 
-        <div><a href="/marca/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Marca</a></div>
+        <div><a href="{{route('marca.create')}}" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Marca</a></div>
 
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
@@ -25,11 +25,11 @@
                     @foreach ($marcas as $marca)
                     <tr>
                         <td>{{$marca->tipo_marca}}</td>
-                        <td><a href="/marca/{{$marca->id}}/edit"
+                        <td><a href="{{route('marca.edit',['marca'=>$marca->id])}}"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Editar</a></td>
                         <td>
-                            <form action="/marca/{{$marca->id}}" method="POST">
+                            <form action="{{route('marca.destroy',['marca'=>$marca->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"

@@ -29,11 +29,11 @@
                         <td>{{$client->user->lastname}}</td>
                         <td>{{$client->user->dni}}</td>
                         <td>{{$client->user->email}}</td>
-                        <td><a href="/client/{{$client->id}}"
+                        <td><a href="{{route('client.show',['client'=>$client->id])}}"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Detalle</a></td>
                         <td>
-                            <form action="/client/{{$client->id}}" method="POST">
+                            <form action="{{route('client.destroy',['client'=>$client->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"

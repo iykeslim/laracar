@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/turno" method="POST">
+    <form action="{{route('turno.store')}}" method="POST">
         @csrf
         <div class="row">
             <div class="col-8 offset-2">
@@ -12,19 +12,19 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="tipo" class="col-md-4 col-form-label text-md-right">Tipo de Veiculo</label>
+                    <label for="vehicle_types_id" class="col-md-4 col-form-label text-md-right">Tipo de Veiculo</label>
 
                     <div class="col-md-6">
 
-                        <select name="tipo" id="tipo" class="form-control @error('tipo') is-invalid @enderror">
+                        <select name="vehicle_types_id" id="vehicle_types_id" class="form-control @error('vehicle_types_id') is-invalid @enderror">
                             @foreach ($tipos_autos as $tipo)
-                            <option value="{{$tipo->tipo_veiculo}}">{{$tipo->tipo_veiculo}}</option>
+                            <option value="{{$tipo->id}}">{{$tipo->tipo_veiculo}}</option>
                             @endforeach
                         </select>
                         {{-- <input id="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror"
                             name="tipo" value="{{ old('tipo') }}" autocomplete="tipo"> --}}
 
-                        @error('tipo')
+                        @error('vehicle_types_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -33,18 +33,18 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="marca" class="col-md-4 col-form-label text-md-right">Marca</label>
+                    <label for="marcas_id" class="col-md-4 col-form-label text-md-right">Marca</label>
 
                     <div class="col-md-6">
-                        <select name="marca" id="marca" class="form-control @error('marca') is-invalid @enderror">
+                        <select name="marcas_id" id="marcas_id" class="form-control @error('marcas_id') is-invalid @enderror">
                             @foreach ($marcas as $marca)
-                            <option value="{{$marca->tipo_marca}}">{{$marca->tipo_marca}}</option>
+                            <option value="{{$marca->id}}">{{$marca->tipo_marca}}</option>
                             @endforeach
                         </select>
                         {{-- <input id="marca" type="text" class="form-control @error('marca') is-invalid @enderror"
                             name="marca" value="{{ old('marca') }}" autocomplete="marca"> --}}
 
-                        @error('marca')
+                        @error('marcas_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -53,18 +53,18 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="modelo" class="col-md-4 col-form-label text-md-right">Modelo</label>
+                    <label for="model_types_id" class="col-md-4 col-form-label text-md-right">Modelo</label>
 
                     <div class="col-md-6">
-                        <select name="modelo" id="modelo" class="form-control @error('modelo') is-invalid @enderror">
+                        <select name="model_types_id" id="model_types_id" class="form-control @error('model_types_id') is-invalid @enderror">
                             @foreach ($modelos as $modelo)
-                            <option value="{{$modelo->tipo_modelo}}">{{$modelo->tipo_modelo}}</option>
+                            <option value="{{$modelo->id}}">{{$modelo->tipo_modelo}}</option>
                             @endforeach
                         </select>
                         {{-- <input id="modelo" type="text" class="form-control @error('modelo') is-invalid @enderror" name="modelo"
                             value="{{ old('modelo') }}" autocomplete="modelo"> --}}
 
-                        @error('modelo')
+                        @error('model_types_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -140,19 +140,19 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="lavado" class="col-md-4 col-form-label text-md-right">Tipo de Lavado</label>
+                    <label for="wash_types_id" class="col-md-4 col-form-label text-md-right">Tipo de Lavado</label>
 
                     <div class="col-md-6">
-                        <select name="lavado" id="lavado" class="form-control @error('lavado') is-invalid @enderror">
-                            @foreach ($tipo_lavados as $tipo_lavado)
-                            <option value="{{$tipo_lavado->tipo_lavado}}">{{$tipo_lavado->tipo_lavado}}:
-                                ${{$tipo_lavado->precio}}</option>
+                        <select name="wash_types_id" id="wash_types_id" class="form-control @error('wash_types_id') is-invalid @enderror">
+                            @foreach ($WashTypes as $WashType)
+                            <option value="{{$WashType->id}}">{{$WashType->tipo_lavado}}:
+                                ${{$WashType->precio}}</option>
                             @endforeach
                         </select>
                         {{-- <input id="lavado" type="text" class="form-control @error('lavado') is-invalid @enderror"
                             name="lavado" value="{{ old('lavado') }}" autocomplete="lavado"> --}}
 
-                        @error('lavado')
+                        @error('wash_types_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -168,7 +168,7 @@
                         <button type="submit" class="btn btn-primary"
                             style="color: rgb(233, 225, 235)">Registrar</button>
 
-                        <a href="/client/{{$client_id}}" class="btn btn-md btn-primary rounded"
+                        <a href="{{route('client.show',['client'=>$client_id])}}" class="btn btn-md btn-primary rounded"
                             style="color: rgb(233, 225, 235)">Regresar</a>
                     </div>
                 </div>

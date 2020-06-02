@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/veiculo" method="POST">
+    <form action="{{route('vehicleType.store')}}" method="POST">
         @csrf
         <div class="row">
             <div class="col-8 offset-2">

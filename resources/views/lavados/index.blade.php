@@ -9,7 +9,7 @@
             <hr>
         </div>
 
-        <div><a href="/washType/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Lavado</a></div>
+        <div><a href="{{route('washType.create')}}" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Lavado</a></div>
 
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
@@ -27,11 +27,11 @@
                     <tr>
                         <td>{{$washType->tipo_lavado}}</td>
                         <td>{{$washType->precio}}</td>
-                        <td><a href="/washType/{{$washType->id}}/edit"
+                        <td><a href="{{route('washType.edit',['washType'=>$washType->id])}}"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Editar</a></td>
                         <td>
-                            <form action="/washType/{{$washType->id}}" method="POST">
+                            <form action="{{route('washType.destroy',['washType'=>$washType->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"

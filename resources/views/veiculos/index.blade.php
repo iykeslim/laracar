@@ -25,11 +25,11 @@
                     @foreach ($vehicleTypes as $vehicleType)
                     <tr>
                         <td>{{$vehicleType->tipo_veiculo}}</td>
-                        <td><a href="/vehicleType/{{$vehicleType->id}}/edit"
+                        <td><a href="{{route('vehicleType.edit',['vehicleType'=>$vehicleType->id])}}"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Editar</a></td>
                         <td>
-                            <form action="/vehicleType/{{$vehicleType->id}}" method="POST">
+                            <form action="{{route('vehicleType.destroy',['vehicleType'=>$vehicleType->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"

@@ -9,7 +9,7 @@
             <hr>
         </div>
 
-        <div><a href="/modelo/create" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Modelo</a></div>
+        <div><a href="{{route('modelo.create')}}" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Modelo</a></div>
 
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
@@ -25,11 +25,11 @@
                     @foreach ($modelos as $modelo)
                     <tr>
                         <td>{{$modelo->tipo_modelo}}</td>
-                        <td><a href="/modelo/{{$modelo->id}}/edit"
+                        <td><a href="{{route('modelo.edit',['modelo'=>$modelo->id])}}"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
                             style="color: rgb(121, 61, 22)">Editar</a></td>
                         <td>
-                            <form action="/modelo/{{$modelo->id}}" method="POST">
+                            <form action="{{route('modelo.destroy',['modelo'=>$modelo->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"

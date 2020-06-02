@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/marca" method="POST">
+    <form action="{{route('marca.store')}}" method="POST">
         @csrf
         <div class="row">
             <div class="col-8 offset-2">

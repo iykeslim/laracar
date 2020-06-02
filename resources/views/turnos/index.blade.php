@@ -24,7 +24,7 @@
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
             <table class="table table-bordered table-striped">
-                <thead class="d-flex">
+                <thead class="">
                     <tr>
                         <th>Identificador</th>
                         <th>Cliente</th>
@@ -36,7 +36,8 @@
                         <th>Hora</th>
                         <th>Lavado</th>
                         <th>Precio</th>
-                        <th colspan="3" style="text-align: center;">Acciones</th>
+                        <th>Recepcionado</th>
+                        <th colspan="2" style="text-align: center;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,33 +45,39 @@
                     <tr>
                         <td>{{$turno->identificador}}</td>
                         <td>{{$turno->client->user->name}}</td>
-                        <td>{{$turno->tipo}}</td>
-                        <td>{{$turno->marca}}</td>
-                        <td>{{$turno->modelo}}</td>
+                        <td>{{$turno->vehicle_types->tipo_veiculo}}</td>
+                        <td>{{$turno->marcas->tipo_marca}}</td>
+                        <td>{{$turno->model_types->tipo_modelo}}</td>
                         <td>{{$turno->color}}</td>
                         <td>{{$turno->matricula}}</td>
                         <td>{{$turno->fecha_turno}}</td>
-                        <td>{{$turno->lavado}}</td>
+                        <td>{{$turno->wash_types->tipo_lavado}}</td>
                         <td>{{$turno->precio}}</td>
-                        <td>
+                        {{-- <td>
                             <a href="{{route('turno.edit',['turno'=>$turno->id])}}"
-                                class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                                style="color: rgb(121, 61, 22)">Recepcionar</a>
+                        class="btn btn-sm waves-effect waves-ligh border border-secondary rounded"
+                        style="color: rgb(121, 61, 22)">Recepcionar</a>
+                        </td> --}}
+                        <td style="text-align: center">
+                            @if ($turno->recepcionado)
+                            Recepcionado
+                            @else
+                            No Recepcionado
+                            @endif
                         </td>
                         <td>
-                            <a href="{{route('turno.edit',['turno'=>$turno->id])}}"
-                                class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                                style="color: rgb(121, 61, 22)">Editar</a>
+                            <a href="{{route('turno.edit',['turno'=>$turno->id])}}" class="btn btn-sm waves-effect waves-ligh border border-secondary rounded
+                                @if ($turno->recepcionado) disabled @endif" style="color: rgb(121, 61, 22)">Editar</a>
                         </td>
 
                         <td>
-                        <form action="{{route('turno.destroy',['turno'=>$turno->id])}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                                style="color: rgb(61, 46, 85)"
-                                onclick="return confirm('Está seguro de eliminar esta Truno?');">Cancelar</button>
+                            <form action="{{route('turno.destroy',['turno'=>$turno->id])}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" @if ($turno->recepcionado) disabled @endif
+                                    class="btn btn-sm waves-effect waves-ligh border border-secondary rounded"
+                                    style="color: rgb(61, 46, 85)"
+                                    onclick="return confirm('Está seguro de eliminar esta Truno?');">Cancelar</button>
                             </form>
                         </td>
                     </tr>

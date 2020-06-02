@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/washType/{{$washType->id}}" method="POST">
+    <form action="{{route('washType.update',['washType'=>$washType->id])}}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row">
