@@ -34,3 +34,5 @@ Route::resource('systemUser', 'UsuariosController');
 Route::resource('washType', 'TipoLavadoController');
 
 Route::resource('vehicleType', 'TipoAutoController');
+
+Route::post('/autocomplete/vehicles', 'AutocompleteController@vehicles')->name("autocomplete.vehicles");

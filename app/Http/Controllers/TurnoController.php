@@ -111,14 +111,14 @@ class TurnoController extends Controller
     {
         $this->authorize('update', $turno);
 
+
         $date = Carbon::createFromFormat('Y-m-d h:i A', request('fecha') . request('hora'))->toDateTimeString();
 
-        // dd(DB::table('wash_types')->where('tipo_lavado', request()['lavado'])->value('precio'));
         $recepcionado = (request('recepcionar') == "on" ? true : false);
 
         $precio = WashType::find(request('wash_types_id'))['precio'];
 
-        // dd($recepcionado);
+        $vehiculo =  VehicleType::where('tipo_veiculo',request('vehicle_types_id'))->get()[0]->id;
 
         $update_turno = Validator::make(array_merge(
             request()->all(),
@@ -126,6 +126,7 @@ class TurnoController extends Controller
                 'precio' => $precio,
                 'fecha_turno' => $date,
                 'recepcionado' => $recepcionado,
+                'vehicle_types_id' =>$vehiculo,
             ]
         ), [
             'vehicle_types_id' => ['required'],
