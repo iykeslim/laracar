@@ -115,10 +115,7 @@ class TurnoController extends Controller
         $date = Carbon::createFromFormat('Y-m-d h:i A', request('fecha') . request('hora'))->toDateTimeString();
 
         $recepcionado = (request('recepcionar') == "on" ? true : false);
-
         $precio = WashType::find(request('wash_types_id'))['precio'];
-
-        $vehiculo =  VehicleType::where('tipo_veiculo',request('vehicle_types_id'))->get()[0]->id;
 
         $update_turno = Validator::make(array_merge(
             request()->all(),
@@ -126,7 +123,6 @@ class TurnoController extends Controller
                 'precio' => $precio,
                 'fecha_turno' => $date,
                 'recepcionado' => $recepcionado,
-                'vehicle_types_id' =>$vehiculo,
             ]
         ), [
             'vehicle_types_id' => ['required'],
@@ -141,7 +137,15 @@ class TurnoController extends Controller
             'identificador' => ['unique:turnos', Rule::unique('trunos')->ignore($turno->id)],
         ])->validate();
 
-        $turno->update($update_turno);
+        $vehiculo =  VehicleType::where('tipo_veiculo', request('vehicle_types_id'))->get()[0]->id;
+        $mark =  Marca::where('tipo_marca', request('marcas_id'))->get()[0]->id;
+        $model =  ModelType::where('tipo_modelo', request('model_types_id'))->get()[0]->id;
+
+        $turno->update(array_merge($update_turno, [
+            'vehicle_types_id' => $vehiculo,
+            'marcas_id' => $mark,
+            'model_types_id' => $model,
+        ]));
 
         return redirect()->route('client.show', ['client' => $turno->client_id]);
     }

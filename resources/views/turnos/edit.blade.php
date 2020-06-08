@@ -16,16 +16,11 @@
                     <label for="vehicle_types_id" class="col-md-4 col-form-label text-md-right">Tipo de Veiculo</label>
 
                     <div class="col-md-6">
-
-                        {{-- <select name="vehicle_types_id" id="vehicle_types_id" class="form-control @error('vehicle_types_id') is-invalid @enderror">
-                            @foreach ($tipos_autos as $tipo)
-                            <option value="{{$tipo->id}}">{{$tipo->tipo_veiculo}}</option>
-                        @endforeach
-                        </select> --}}
                         <input id="vehicle_types_id" type="text"
                             class="form-control @error('vehicle_types_id') is-invalid @enderror" name="vehicle_types_id"
-                            value="{{ old('vehicle_types_id') }}" autocomplete="vehicle_types_id">
-                        <div id="cpuList"></div>
+                            value="{{ old('vehicle_types_id') ?? $turno->vehicle_types->tipo_veiculo }}"
+                            autocomplete="vehicle_types_id">
+                        <div id="vehicleList"></div>
                         @error('vehicle_types_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -38,14 +33,10 @@
                     <label for="marcas_id" class="col-md-4 col-form-label text-md-right">Marca</label>
 
                     <div class="col-md-6">
-                        <select name="marcas_id" id="marcas_id"
-                            class="form-control @error('marcas_id') is-invalid @enderror">
-                            @foreach ($marcas as $marca)
-                            <option value="{{$marca->id}}">{{$marca->tipo_marca}}</option>
-                            @endforeach
-                        </select>
-                        {{-- <input id="marca" type="text" class="form-control @error('marca') is-invalid @enderror"
-                            name="marca" value="{{ old('marca') }}" autocomplete="marca"> --}}
+                        <input id="marcas_id" type="text" class="form-control @error('marcas_id') is-invalid @enderror"
+                            name="marcas_id" value="{{ old('marcas_id') ?? $turno->marcas->tipo_marca}}"
+                            autocomplete="marcas_id">
+                        <div id="markList"></div>
 
                         @error('marcas_id')
                         <span class="invalid-feedback" role="alert">
@@ -59,15 +50,11 @@
                     <label for="model_types_id" class="col-md-4 col-form-label text-md-right">Modelo</label>
 
                     <div class="col-md-6">
-                        <select name="model_types_id" id="model_types_id"
-                            class="form-control @error('model_types_id') is-invalid @enderror">
-                            @foreach ($modelos as $modelo)
-                            <option value="{{$modelo->id}}">{{$modelo->tipo_modelo}}</option>
-                            @endforeach
-                        </select>
-                        {{-- <input id="modelo" type="text" class="form-control @error('modelo') is-invalid @enderror" name="modelo"
-                            value="{{ old('modelo') }}" autocomplete="modelo"> --}}
-
+                        <input id="model_types_id" type="text"
+                            class="form-control @error('model_types_id') is-invalid @enderror" name="model_types_id"
+                            value="{{ old('model_types_id') ?? $turno->model_types->tipo_modelo }}"
+                            autocomplete="model_types_id">
+                        <div id="modelList"></div>
                         @error('model_types_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -198,8 +185,6 @@
 </div>
 
 <script>
-
-
     document.getElementById('vehicle_types_id').onkeyup = ()=>{
         var query = $("#vehicle_types_id").val();
         if(query != '')
@@ -210,8 +195,42 @@
               method:"POST",
               data:{query:query, _token:_token},
               success:function(data){
-               $('#cpuList').fadeIn();
-               $('#cpuList').html(data);
+               $('#vehicleList').fadeIn();
+               $('#vehicleList').html(data);
+              }
+             });
+            }
+        };
+
+        document.getElementById('marcas_id').onkeyup = ()=>{
+        var query = $("#marcas_id").val();
+        if(query != '')
+        {
+            var _token = $('input[name="_token"]').val();
+             $.ajax({
+              url:"{{ route('autocomplete.marks') }}",
+              method:"POST",
+              data:{query:query, _token:_token},
+              success:function(data){
+               $('#markList').fadeIn();
+               $('#markList').html(data);
+              }
+             });
+            }
+        };
+
+        document.getElementById('model_types_id').onkeyup = ()=>{
+        var query = $("#model_types_id").val();
+        if(query != '')
+        {
+            var _token = $('input[name="_token"]').val();
+             $.ajax({
+              url:"{{ route('autocomplete.models') }}",
+              method:"POST",
+              data:{query:query, _token:_token},
+              success:function(data){
+               $('#modelList').fadeIn();
+               $('#modelList').html(data);
               }
              });
             }
