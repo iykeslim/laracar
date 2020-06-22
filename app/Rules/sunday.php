@@ -25,8 +25,8 @@ class sunday implements Rule
      */
     public function passes($attribute, $value)
     {
-        $date = date('l',strtotime($value));
-        return $date!='Sunday';
+        $date = date('D',strtotime($value));
+        return $date!='Sun';
     }
 
     /**

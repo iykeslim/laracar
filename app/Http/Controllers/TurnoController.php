@@ -81,7 +81,7 @@ class TurnoController extends Controller
             'precio' => ['required'],
             'color' => ['required'],
             'matricula' => ['required', 'regex:/([A-Z]{2})([0-9]{3})([A-Z]{2})$|([A-Z]{3})([0-9]{3})$/i'],
-            'fecha_turno' => ['required', Rule::unique('turnos')],
+            'fecha_turno' => ['required', Rule::unique('turnos'), new sunday()],
             'identificador' => ['unique:turnos'],
             'client_id' => ['required'],
             'recepcionado' => ['required'],
@@ -133,7 +133,7 @@ class TurnoController extends Controller
             'precio' => ['required'],
             'color' => ['required'],
             'matricula' => ['required', 'regex:/([A-Z]{2})([0-9]{3})([A-Z]{2})$|([A-Z]{3})([0-9]{3})$/i'],
-            'fecha_turno' => ['required', Rule::unique('turnos')->ignore($turno->id)], // new sunday()],
+            'fecha_turno' => ['required', Rule::unique('turnos')->ignore($turno->id), new sunday()],
             'identificador' => ['unique:turnos', Rule::unique('trunos')->ignore($turno->id)],
         ])->validate();
 

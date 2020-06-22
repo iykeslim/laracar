@@ -98,10 +98,10 @@
                     <label for="fecha" class="col-md-4 col-form-label text-md-right">Fecha</label>
 
                     <div class="col-md-6">
-                        <input id="fecha" type="date" class="form-control @error('fecha') is-invalid @enderror"
+                        <input id="fecha" type="date" class="form-control @error('fecha_turno') is-invalid @enderror"
                             name="fecha" value="{{ old('fecha') ?? $fecha }}" autocomplete="fecha">
 
-                        @error('fecha')
+                        @error('fecha_turno')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
