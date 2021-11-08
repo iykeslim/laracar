@@ -14,13 +14,13 @@
             <table class="table table-bordered table-striped">
                 <thead class="">
                     <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>DNI</th>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Driver's License Number</th>
                         <th>Email</th>
-                        <th>Rol</th>
-                        <th>Detalles</th>
-                        <th>Eliminar</th>
+                        <th>Role</th>
+                        <th>Details</th>
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,13 +33,13 @@
                         <td>{{$systemUser->role ?? 'lala'}}</td>
                         <td><a href="{{route('systemUser.show',['systemUser'=>$systemUser->id])}}"
                             class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(121, 61, 22)">Detalle</a></td>
+                            style="color: rgb(121, 61, 22)">Detail</a></td>
                         <td>
                             <form action="{{route('systemUser.destroy',['systemUser'=>$systemUser->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(61, 46, 85)"  onclick="return confirm('Está seguro de eliminar esta Usuario?');">Eliminar</button>
+                            style="color: rgb(61, 46, 85)"  onclick="return confirm('Está seguro de eliminar esta Usuario?');">Delete</button>
                             </td>
                         </form>
 

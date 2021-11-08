@@ -12,25 +12,25 @@
         <div class="row pt-2 col col-12">
 
             <dl class="row offset-3">
-                <dt class="col-sm-3">Nombre:</dt>
+                <dt class="col-sm-3">Name:</dt>
                 <dd class="col-sm-9">{{$systemUser->user->name}} {{$systemUser->user->lastname}}.</dd>
 
-                <dt class="col-sm-3">DNI:</dt>
+                <dt class="col-sm-3">Driver's License Number:</dt>
                 <dd class="col-sm-9">{{$systemUser->user->dni}}</dd>
 
                 <dt class="col-sm-3">Email</dt>
                 <dd class="col-sm-9">{{$systemUser->user->email}}</dd>
 
-                <dt class="col-3">Acciones:</dt>
+                <dt class="col-3">Actions:</dt>
                 <dd class="col-9 d-flex align-items-baseline">
                     <a href="{{route('systemUser.edit',['systemUser'=>$systemUser->id])}}"
                         class="mr-5 btn btn-md waves-effect waves-ligh  border border-secondary rounded"
-                        style="color: rgb(61, 46, 85)">Editar Perfil</a>
+                        style="color: rgb(61, 46, 85)">Edit Profile</a>
                         <form action="{{route('systemUser.destroy',['systemUser'=>$systemUser->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-md waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(61, 46, 85)">Eliminar</button>
+                            style="color: rgb(61, 46, 85)">Remove</button>
                         </form>
                     </dd>
             </dl>

@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
+                    <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                     <div class="col-md-6">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="lastname" class="col-md-4 col-form-label text-md-right">Apellido</label>
+                    <label for="lastname" class="col-md-4 col-form-label text-md-right">Last Name</label>
 
                     <div class="col-md-6">
                         <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror"
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="dni" class="col-md-4 col-form-label text-md-right">DNI</label>
+                    <label for="dni" class="col-md-4 col-form-label text-md-right">Driver's License Number</label>
 
                     <div class="col-md-6">
                         <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni"
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="telefono" class="col-md-4 col-form-label text-md-right">Teléfono</label>
+                    <label for="telefono" class="col-md-4 col-form-label text-md-right">Phone Number</label>
 
                     <div class="col-md-6">
                         <input id="telefono" type="telefono"
@@ -91,7 +91,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="direccion" class="col-md-4 col-form-label text-md-right">Dirección</label>
+                    <label for="direccion" class="col-md-4 col-form-label text-md-right">Address</label>
 
                     <div class="col-md-6">
                         <input id="direccion" type="text" class="form-control @error('direccion') is-invalid @enderror"
@@ -122,7 +122,7 @@
                 </div>
 
                 <div class="row pt-4">
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
 
             </div>

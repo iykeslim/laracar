@@ -12,32 +12,32 @@
         <div class="row pt-2 col col-12">
 
             <dl class="row offset-3">
-                <dt class="col-sm-3">Nombre:</dt>
+                <dt class="col-sm-3">Name:</dt>
                 <dd class="col-sm-9">{{$client->user->name}} {{$client->user->lastname}}.</dd>
 
-                <dt class="col-sm-3">DNI:</dt>
+                <dt class="col-sm-3">Driver's License Number:</dt>
                 <dd class="col-sm-9">{{$client->user->dni}}</dd>
 
                 <dt class="col-sm-3">Email</dt>
                 <dd class="col-sm-9">{{$client->user->email}}</dd>
 
-                <dt class="col-sm-3 text-truncate">Teléfono</dt>
+                <dt class="col-sm-3 text-truncate">Phone Number</dt>
                 <dd class="col-sm-9">{{$client->user->client->telefono}}</dd>
 
-                <dt class="col-sm-3">Dirección</dt>
+                <dt class="col-sm-3">Address</dt>
                 <dd class="col-sm-9">{{$client->user->client->direccion}}</dd>
 
-                <dt class="col-3">Acciones:</dt>
+                <dt class="col-3">Actions:</dt>
                 <dd class="col-9 d-flex align-items-baseline">
                     <a href="{{route('client.edit',['client'=>$client->id])}}"
                         class="mr-5 btn btn-md waves-effect waves-ligh  border border-secondary rounded"
-                        style="color: rgb(61, 46, 85)">Editar Perfil</a>
+                        style="color: rgb(61, 46, 85)">Edit Profile</a>
                     <form action="{{route('turno.create')}}" method="GET">
                         @csrf
                         <input type="hidden" name="client_id" value="{{$client->id}}">
                         <button type="submit"
                             class="btn btn-md waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(82, 38, 38)">Reserver Turno</button>
+                            style="color: rgb(82, 38, 38)">Book A Turn</button>
                     </form>
                 </dd>
             </dl>
@@ -48,17 +48,17 @@
             <table class="table table-bordered table-striped">
                 <thead class="">
                     <tr>
-                        <th>Identificador</th>
-                        <th>TipoVeiculo</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
+                        <th>ID</th>
+                        <th>Types</th>
+                        <th>Brand</th>
+                        <th>Model</th>
                         <th>Color</th>
-                        <th>Matricula</th>
-                        <th>Fecha</th>
-                        <th>Lavado</th>
-                        <th>Precio</th>
-                        <th>Editar</th>
-                        <th>Cancelar</th>
+                        <th>Registration Number</th>
+                        <th>Date</th>
+                        <th>Wash</th>
+                        <th>Price</th>
+                        <th>Edit</th>
+                        <th>Cancel</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,7 +76,7 @@
                         <td>
 
                             <a href="{{route('turno.edit',['turno'=>$turno->id])}}" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded
-                                @if ($turno->recepcionado) disabled @endif" style="color: rgb(121, 61, 22)">Editar</a>
+                                @if ($turno->recepcionado) disabled @endif" style="color: rgb(121, 61, 22)">Edit</a>
 
                         </td>
                         <td>
@@ -87,7 +87,7 @@
                                 <button type="submit" @if ($turno->recepcionado) disabled @endif
                                     class="btn btn-sm waves-effect waves-ligh border border-secondary rounded"
                                     style="color: rgb(61, 46, 85)" onclick="return confirm('Está seguro de eliminar este
-                                    Turno?');">Cancelar</button>
+                                    Turno?');">Cancel</button>
                             </form>
                         </td>
 
