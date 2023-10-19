@@ -4,11 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col col-12">
-            <hr>
-        <h2 class="intro-text text-center">Listado de Usuarios</strong></h2>
-            <hr>
-        </div>
-        <div><a href="{{route('systemUser.create')}}" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded">Añadir Usuario</a></div>
+        <hr>
+<h2 class="intro-text text-center">List of Users</h2>
+<hr>
+</div>
+<div><a href="{{route('systemUser.create')}}" class="btn btn-sm waves-effect waves-light  border border-secondary rounded">Add User</a></div>
+
         <div class="row pt-2 col-12">
             <hr style="width: 100%">
             <table class="table table-bordered table-striped">

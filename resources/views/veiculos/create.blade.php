@@ -2,17 +2,17 @@
 
 @section('content')
 <div class="container">
-    <form action="{{route('vehicleType.store')}}" method="POST">
+    <form action="{{ route('vehicleType.store') }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-8 offset-2">
 
                 <div class="row">
-                    <h1>Añadir Nuevo Veiculo</h1>
+                    <h1>Add New Vehicle</h1>
                 </div>
 
                 <div class="form-group row">
-                    <label for="tipo_veiculo" class="col-md-4 col-form-label text-md-right">Nombre</label>
+                    <label for="tipo_veiculo" class="col-md-4 col-form-label text-md-right">Name</label>
 
                     <div class="col-md-6">
                         <input id="tipo_veiculo" type="text" class="form-control @error('tipo_veiculo') is-invalid @enderror"
@@ -27,14 +27,11 @@
                 </div>
 
                 <div class="row pt-4">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
 
             </div>
-
-
         </div>
-
     </form>
 </div>
 @endsection

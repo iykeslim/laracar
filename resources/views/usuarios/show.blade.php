@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col col-12">
             <hr>
-        <h2 class="intro-text text-center">Detalles del usuario  <strong>{{$systemUser->user->name}}</strong></h2>
+        <h2 class="intro-text text-center">User Details  <strong>{{$systemUser->user->name}}</strong></h2>
             <hr>
         </div>
 
@@ -24,12 +24,12 @@
                 <dt class="col-3">Actions:</dt>
                 <dd class="col-9 d-flex align-items-baseline">
                     <a href="{{route('systemUser.edit',['systemUser'=>$systemUser->id])}}"
-                        class="mr-5 btn btn-md waves-effect waves-ligh  border border-secondary rounded"
+                        class="mr-5 btn btn-md waves-effect waves-light  border border-secondary rounded"
                         style="color: rgb(61, 46, 85)">Edit Profile</a>
                         <form action="{{route('systemUser.destroy',['systemUser'=>$systemUser->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-md waves-effect waves-ligh  border border-secondary rounded"
+                            <button type="submit" class="btn btn-md waves-effect waves-light  border border-secondary rounded"
                             style="color: rgb(61, 46, 85)">Remove</button>
                         </form>
                     </dd>
@@ -41,41 +41,41 @@
             <table class="table table-bordered table-striped">
                 <thead class="">
                     <tr>
-                        <th>Identificador</th>
-                        <th>TipoVeiculo</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
+                        <th>Identifier</th>
+                        <th>Vehicle Type</th>
+                        <th>Brand</th>
+                        <th>Model</th>
                         <th>Color</th>
-                        <th>Matricula</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Lavado</th>
-                        <th>Editar</th>
-                        <th>Cancelar</th>
+                        <th>License Plate</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Car Wash</th>
+                        <th>Edit</th>
+                        <th>Cancel</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($turnos as $turno)
                     <tr>
-                        <td>{{$turno->identificador}}</td>
-                        <td>{{$turno->tipo}}</td>
-                        <td>{{$turno->marca}}</td>
-                        <td>{{$turno->modelo}}</td>
+                        <td>{{$turno->identifier}}</td>
+                        <td>{{$turno->type}}</td>
+                        <td>{{$turno->brand}}</td>
+                        <td>{{$turno->model}}</td>
                         <td>{{$turno->color}}</td>
-                        <td>{{$turno->matricula}}</td>
-                        <td>{{$turno->fecha}}</td>
-                        <td>{{$turno->hora}}</td>
-                        <td>{{$turno->lavado}}</td>
+                        <td>{{$turno->license_plate}}</td>
+                        <td>{{$turno->date}}</td>
+                        <td>{{$turno->time}}</td>
+                        <td>{{$turno->car_wash}}</td>
                         <td><a href="/turno/{{$turno->id}}/edit"
-                            class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(121, 61, 22)">Editar</a></td>
+                            class="btn btn-sm waves-effect waves-light  border border-secondary rounded"
+                            style="color: rgb(121, 61, 22)">Edit</a></td>
                         <td>
 
                             <form action="/turno/{{$turno->id}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm waves-effect waves-ligh  border border-secondary rounded"
-                            style="color: rgb(61, 46, 85)">Cancelar</button>
+                            <button type="submit" class="btn btn-sm waves-effect waves-light  border border-secondary rounded"
+                            style="color: rgb(61, 46, 85)">Cancel</button>
                         </form>
                     </td>
 

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col col-12">
             <hr>
-            <h2 class="intro-text text-center">Detalles del cliente <strong>{{$client->user->name}}</strong></h2>
+            <h2 class="intro-text text-center">Customer details <strong>{{$client->user->name}}</strong></h2>
             <hr>
         </div>
 
@@ -86,8 +86,7 @@
                                 @method('DELETE')
                                 <button type="submit" @if ($turno->recepcionado) disabled @endif
                                     class="btn btn-sm waves-effect waves-ligh border border-secondary rounded"
-                                    style="color: rgb(61, 46, 85)" onclick="return confirm('Está seguro de eliminar este
-                                    Turno?');">Cancel</button>
+                                    style="color: rgb(61, 46, 85)" onclick="return confirm('Are you sure you want to delete this?');">Cancel</button>
                             </form>
                         </td>
 

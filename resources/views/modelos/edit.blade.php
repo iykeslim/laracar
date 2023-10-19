@@ -2,18 +2,18 @@
 
 @section('content')
 <div class="container">
-    <form action="{{route('modelo.update',['modelo'=>$modelo->id])}}" method="POST">
+    <form action="{{ route('modelo.update', ['modelo' => $modelo->id]) }}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row">
             <div class="col-8 offset-2">
 
                 <div class="row">
-                    <h1>Editar Modelo</h1>
+                    <h1>Edit Model</h1>
                 </div>
 
                 <div class="form-group row">
-                    <label for="tipo_modelo" class="col-md-4 col-form-label text-md-right">Nombre</label>
+                    <label for="tipo_modelo" class="col-md-4 col-form-label text-md-right">Name</label>
 
                     <div class="col-md-6">
                         <input id="tipo_modelo" type="text" class="form-control @error('tipo_modelo') is-invalid @enderror"
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="row pt-4">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
 
             </div>

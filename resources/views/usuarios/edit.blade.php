@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-<form action="{{route('systemUser.update',['systemUser'=>$systemUser->id])}}" method="POST">
+    <form action="{{ route('systemUser.update', ['systemUser' => $systemUser->id]) }}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row">
@@ -10,12 +10,12 @@
 
                 <div class="col col-12">
                     <hr>
-                <h2 class="intro-text text-center">Editar Usuario : {{$systemUser->user->name}} {{ $systemUser->user->lastname}}</h2>
+                    <h2 class="intro-text text-center">Edit User: {{ $systemUser->user->name }} {{ $systemUser->user->lastname }}</h2>
                     <hr>
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
+                    <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                     <div class="col-md-6">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="lastname" class="col-md-4 col-form-label text-md-right">Apellido</label>
+                    <label for="lastname" class="col-md-4 col-form-label text-md-right">Last Name</label>
 
                     <div class="col-md-6">
                         <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror"
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="dni" class="col-md-4 col-form-label text-md-right">DNI</label>
+                    <label for="dni" class="col-md-4 col-form-label text-md-right">ID Number</label>
 
                     <div class="col-md-6">
                         <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni"
@@ -60,13 +60,13 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="role" class="col-md-4 col-form-label text-md-right">Rol</label>
+                    <label for="role" class="col-md-4 col-form-label text-md-right">Role</label>
 
                     <div class="col-md-6">
 
                         <select name="role" id="role" class="form-control">
-                            <option value="administrador">Administrador</option>
-                            <option value="usuario">Usuario</option>
+                            <option value="administrador" @if($systemUser->role == 'administrador') selected @endif>Administrator</option>
+                            <option value="usuario" @if($systemUser->role == 'usuario') selected @endif>User</option>
                         </select>
                         {{-- <input id="role" type="role"
                                     class="form-control @error('role') is-invalid @enderror" name="role"
@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="row pt-4">
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
 
             </div>
